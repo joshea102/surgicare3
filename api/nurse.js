@@ -10,14 +10,11 @@ export default async function handler(req, res) {
   try {
     const { messages, system } = req.body;
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
-    console.log('Key present:', !!apiKey, 'Key start:', apiKey ? apiKey.substring(0, 15) : 'none');
-
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
+        'x-api-key': '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',
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
