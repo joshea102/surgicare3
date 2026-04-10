@@ -723,6 +723,46 @@
     .three-col { grid-template-columns: 1fr; }
   }
 
+
+  /* ── EDUCATION TABS ── */
+  .edu-tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-2);
+    transition: all 0.15s;
+  }
+  .edu-tab:hover { background: var(--bg); }
+  .edu-tab.active { background: var(--blue); border-color: var(--blue); color: white; }
+
+  /* ── EXERCISE ITEMS ── */
+  .exercise-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .exercise-item:last-child { border-bottom: none; }
+  .ex-num {
+    width: 24px; height: 24px;
+    background: var(--blue-light);
+    color: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ex-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .ex-detail { font-size: 11px; color: var(--text-3); margin-top: 2px; line-height: 1.5; }
+
   /* ── ANIMATIONS ── */
   .screen.active { animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
@@ -867,6 +907,10 @@
     <div class="nav-item" onclick="showScreen('postop',this)">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
       Post-op care
+    </div>
+    <div class="nav-item" onclick="showScreen('education',this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+      My procedure
     </div>
   </div>
 
@@ -1525,6 +1569,267 @@
       </div>
     </div>
 
+
+    <!-- EDUCATION SCREEN -->
+    <div id="screen-education" class="screen">
+      <div class="section-intro">
+        <h1>My procedure</h1>
+        <p>Everything you need to know about your surgery — before and after.</p>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+        <button class="edu-tab active" onclick="showEdu('tkr',this)">Total Knee Replacement</button>
+        <button class="edu-tab" onclick="showEdu('tsr',this)">Total Shoulder Replacement</button>
+        <button class="edu-tab" onclick="showEdu('acl',this)">ACL Reconstruction</button>
+        <button class="edu-tab" onclick="showEdu('roto',this)">Rotator Cuff Repair</button>
+      </div>
+
+      <!-- TKR -->
+      <div id="edu-tkr" class="edu-section">
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">What is a Total Knee Replacement?</div></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.8;">
+              Dr. O'Shea removes the damaged cartilage and bone from your knee and replaces it with a metal and plastic implant. Think of it like replacing a worn-out hinge with a brand new one.<br><br>
+              <strong>Why you need it:</strong> Severe arthritis has worn down the cartilage in your knee causing pain, stiffness, and difficulty walking.<br><br>
+              <strong>Surgery time:</strong> 1-2 hours. Most patients go home the same day or next day.<br><br>
+              <strong>The implant:</strong> Designed to last 15-20+ years with proper care.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Recovery timeline</div></div>
+            <div class="timeline">
+              <div class="tl-item"><div class="tl-dot" style="background:var(--red)"></div><div><div class="tl-title">Days 1-3: Most painful phase</div><div class="tl-time">Swelling, pain 6-8/10, hard to bend knee. This is normal.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--amber)"></div><div><div class="tl-title">Days 4-14: Getting easier</div><div class="tl-time">Pain reduces to 4-6/10, swelling improves, short walks possible.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Weeks 3-6: Real progress</div><div class="tl-time">Walking without walker, bending increases, pain 2-4/10.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">Months 3-6: Near normal</div><div class="tl-time">Most daily activities resume, minimal pain, strength returning.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">1 Year: Full recovery</div><div class="tl-time">Full strength, pain-free walking, return to low-impact activities.</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Prehab exercises</div><span class="pill pill-blue">Before surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">Start 4-6 weeks before surgery. Stronger muscles = faster recovery.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Quad sets</div><div class="ex-detail">Lie flat, tighten thigh muscle, hold 5 sec. 3 sets of 10 daily.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Straight leg raises</div><div class="ex-detail">Lie flat, lift straight leg to 45 degrees, hold 2 sec, lower slowly. 3x10.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Heel slides</div><div class="ex-detail">Lying down, slowly slide heel toward buttocks, hold 5 sec. 3x10.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Mini squats</div><div class="ex-detail">Stand holding chair, bend knees 20-30 degrees, hold 5 sec. 3x10.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">5</div><div><div class="ex-name">Daily walks</div><div class="ex-detail">10-20 minute walks daily to build endurance before surgery.</div></div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Post-op rehab exercises</div><span class="pill pill-green">After surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">Begin Day 1 post-op with guidance from your physical therapist.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Ankle pumps</div><div class="ex-detail">Pump feet up and down. Start immediately. Prevents blood clots.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Quad sets</div><div class="ex-detail">Tighten thigh, hold 5 sec. Begin Day 1, 3x10 every 2 hours.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Heel slides</div><div class="ex-detail">Goal is 90 degree bend by week 2. Go slow, never force it.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Seated knee bends</div><div class="ex-detail">Sit in chair, bend knee as far as comfortable, hold 10 sec.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">5</div><div><div class="ex-name">Walking program</div><div class="ex-detail">Day 1: walker and 10 steps. Add distance each day as tolerated.</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Pain and stiffness - what is normal?</div><span class="pill pill-amber">Important to know</span></div>
+          <div class="three-col" style="margin-bottom:0;">
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Normal pain</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Aching and throbbing around the knee. Worse in the morning and after activity. Improves with ice and elevation. Gets better each week.</div>
+            </div>
+            <div style="padding:14px;background:var(--amber-light);border-radius:var(--radius-sm);border:1px solid #f5d89a;">
+              <div style="font-size:11px;font-weight:600;color:var(--amber);text-transform:uppercase;margin-bottom:8px;">Normal stiffness</div>
+              <div style="font-size:12px;color:#7a4a00;line-height:1.7;">Difficulty bending past 90 degrees in first 2 weeks. Morning stiffness lasting 30-60 minutes. Clicking or popping sounds are normal.</div>
+            </div>
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Call us if you have...</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Fever above 101F. Calf pain or swelling. Sudden sharp increase in pain. Wound opening or unusual discharge.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TSR -->
+      <div id="edu-tsr" class="edu-section" style="display:none;">
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">What is a Total Shoulder Replacement?</div></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.8;">
+              Dr. O'Shea removes the damaged ball-and-socket joint and replaces it with a metal ball and smooth plastic socket. The result is a pain-free, smooth-moving shoulder.<br><br>
+              <strong>Why you need it:</strong> Severe arthritis has destroyed the cartilage in your shoulder causing constant pain, grinding, and very limited motion.<br><br>
+              <strong>Surgery time:</strong> 2-3 hours. Most patients go home the next day.<br><br>
+              <strong>The implant:</strong> Designed to last 15-20 years. You will regain significant pain-free motion.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Recovery timeline</div></div>
+            <div class="timeline">
+              <div class="tl-item"><div class="tl-dot" style="background:var(--red)"></div><div><div class="tl-title">Days 1-7: Sling phase</div><div class="tl-time">Arm in sling at all times. Pain 5-7/10. Significant swelling.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--amber)"></div><div><div class="tl-title">Weeks 2-6: Gentle motion begins</div><div class="tl-time">PT starts passive motion. Still in sling. Pain gradually reduces.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Weeks 6-12: Active motion</div><div class="tl-time">Sling removed, active exercises begin, strength slowly returns.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">Months 4-6: Functional use</div><div class="tl-time">Most daily tasks possible, driving resumes, pain minimal.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">1 Year: Full recovery</div><div class="tl-time">Full strength and range of motion achieved.</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Prehab exercises</div><span class="pill pill-blue">Before surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">Strengthen surrounding muscles before surgery for faster healing.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Pendulum swings</div><div class="ex-detail">Lean forward, let arm hang, make small circles. 2 minutes daily.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Shoulder blade squeezes</div><div class="ex-detail">Squeeze shoulder blades together, hold 5 sec. 3x10 daily.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Wall slides</div><div class="ex-detail">Slide arms up wall as far as comfortable without pain. 3x10.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Grip strengthening</div><div class="ex-detail">Squeeze a soft ball 30 times each hand. Helps circulation.</div></div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Post-op rehab exercises</div><span class="pill pill-green">After surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">Only do these under PT guidance. Never force movement.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Pendulum swings</div><div class="ex-detail">Begin Day 1. Lean forward, let gravity move arm in small circles.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Elbow and wrist motion</div><div class="ex-detail">Bend and straighten elbow, rotate wrist. Keeps circulation going.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Passive forward flexion</div><div class="ex-detail">Week 2+. PT or other arm lifts operative arm forward gently.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Active-assisted motion</div><div class="ex-detail">Week 6+. Begin lifting arm with your own muscle, use other arm to assist.</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Pain and stiffness - what is normal?</div><span class="pill pill-amber">Important to know</span></div>
+          <div class="three-col" style="margin-bottom:0;">
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Normal pain</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Deep aching in shoulder and upper arm. Worse at night for first 4-6 weeks. Improves steadily with each passing week.</div>
+            </div>
+            <div style="padding:14px;background:var(--amber-light);border-radius:var(--radius-sm);border:1px solid #f5d89a;">
+              <div style="font-size:11px;font-weight:600;color:var(--amber);text-transform:uppercase;margin-bottom:8px;">Normal stiffness</div>
+              <div style="font-size:12px;color:#7a4a00;line-height:1.7;">Very limited motion for first 6 weeks while in sling. Stiffness is expected and normal. Motion returns gradually through PT.</div>
+            </div>
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Call us if you have...</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Fever above 101F. Numbness or tingling in hand. Sudden loss of motion. Wound redness or discharge.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACL -->
+      <div id="edu-acl" class="edu-section" style="display:none;">
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">What is ACL Reconstruction?</div></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.8;">
+              The ACL is one of the main stabilizing ligaments in your knee. Dr. O'Shea replaces the torn ACL with a graft — a piece of tendon from your own body — which becomes your new ACL over time.<br><br>
+              <strong>Why you need it:</strong> Your ACL is completely torn, causing your knee to feel unstable or give way during activity.<br><br>
+              <strong>Surgery time:</strong> 1-1.5 hours. Most patients go home the same day.<br><br>
+              <strong>The graft:</strong> Takes 9-12 months to fully mature into a strong ligament.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Recovery timeline</div></div>
+            <div class="timeline">
+              <div class="tl-item"><div class="tl-dot" style="background:var(--red)"></div><div><div class="tl-title">Days 1-7: Rest and ice</div><div class="tl-time">Crutches required. Significant swelling. Keep elevated. Pain 5-7/10.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--amber)"></div><div><div class="tl-title">Weeks 2-6: Regain motion</div><div class="tl-time">Wean off crutches. PT focuses on full extension and bending.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Months 2-4: Strength building</div><div class="tl-time">Progressive strengthening. Stationary bike, pool walking, gym work.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">Months 4-6: Sport prep</div><div class="tl-time">Running, agility drills, sport-specific training begins.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">9-12 Months: Return to sport</div><div class="tl-time">Full return to competitive sport when cleared by Dr. O'Shea.</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Prehab exercises</div><span class="pill pill-blue">Before surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">Prehab is critical for ACL. Studies show it significantly cuts recovery time.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Quad sets</div><div class="ex-detail">Tighten quad, hold 5 sec. Regain muscle control before surgery. 3x10.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Straight leg raises</div><div class="ex-detail">Lift leg to 45 degrees, hold 2 sec. 3x15 daily. Builds quad strength.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Hamstring curls</div><div class="ex-detail">Stand holding chair, curl heel to buttock, hold 3 sec. 3x10.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Single leg balance</div><div class="ex-detail">Balance on good leg for 30 seconds. Trains stability and control.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">5</div><div><div class="ex-name">Stationary bike</div><div class="ex-detail">20 min low resistance. Maintains fitness before surgery.</div></div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Post-op rehab exercises</div><span class="pill pill-green">After surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">ACL rehab takes patience. Never rush the return to sport.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Ankle pumps</div><div class="ex-detail">Begin immediately post-op. Critical for preventing blood clots.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Quad sets and SLR</div><div class="ex-detail">Begin Day 1. Foundation of entire ACL recovery. 3x10 every hour.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Heel slides</div><div class="ex-detail">Goal 90 degree bend by week 2, 130 degrees by week 6. Never force.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Terminal knee extensions</div><div class="ex-detail">Week 3+. Straighten knee against resistance. Rebuilds quad control.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">5</div><div><div class="ex-name">Stationary bike</div><div class="ex-detail">Week 4-6. Low resistance, no pain. Excellent for graft healing.</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Pain and stiffness - what is normal?</div><span class="pill pill-amber">Important to know</span></div>
+          <div class="three-col" style="margin-bottom:0;">
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Normal pain</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Aching around the knee and graft site. Kneecap soreness is common. Pain improves significantly after week 2.</div>
+            </div>
+            <div style="padding:14px;background:var(--amber-light);border-radius:var(--radius-sm);border:1px solid #f5d89a;">
+              <div style="font-size:11px;font-weight:600;color:var(--amber);text-transform:uppercase;margin-bottom:8px;">Normal stiffness</div>
+              <div style="font-size:12px;color:#7a4a00;line-height:1.7;">Difficulty fully straightening or bending in first 2 weeks. Full extension is the top priority - work on this every day.</div>
+            </div>
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Call us if you have...</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Calf pain or swelling. Fever above 101F. Knee locks and will not straighten. Sudden severe increase in pain.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROTATOR CUFF -->
+      <div id="edu-roto" class="edu-section" style="display:none;">
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">What is Rotator Cuff Repair?</div></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.8;">
+              The rotator cuff is 4 muscles and tendons that hold your shoulder together. Dr. O'Shea reattaches the torn tendon back to the bone using small anchors — usually done through tiny incisions with a camera.<br><br>
+              <strong>Why you need it:</strong> One or more rotator cuff tendons are torn, causing pain, weakness, and difficulty lifting your arm overhead.<br><br>
+              <strong>Surgery time:</strong> 1-2 hours. Most patients go home the same day.<br><br>
+              <strong>Healing:</strong> The tendon takes 4-6 months to heal to the bone. The sling protects this healing.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Recovery timeline</div></div>
+            <div class="timeline">
+              <div class="tl-item"><div class="tl-dot" style="background:var(--red)"></div><div><div class="tl-title">Weeks 1-6: Sling protection</div><div class="tl-time">Sling at all times. No active shoulder movement. Pain 4-7/10.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--amber)"></div><div><div class="tl-title">Weeks 6-12: Passive motion</div><div class="tl-time">PT moves arm for you. Sling is slowly removed. Pain reducing.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Week 6: Active motion begins</div><div class="tl-time">Begin lifting arm yourself. Sling fully removed. Guided by PT.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">Month 3: Strengthening begins</div><div class="tl-time">Progressive resistance training starts, most daily activities return.</div></div></div>
+              <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div><div class="tl-title">6-12 Months: Full recovery</div><div class="tl-time">Full strength and overhead function restored.</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Prehab exercises</div><span class="pill pill-blue">Before surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">Focus on what you can do without pain. Never aggravate the tear.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Pendulum swings</div><div class="ex-detail">Lean forward, let arm hang loose, make gentle circles. 2 min daily.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Elbow flexion</div><div class="ex-detail">Bend and straighten elbow with arm at side. 3x15 daily.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Shoulder blade squeezes</div><div class="ex-detail">Squeeze blades together, hold 5 sec. Strengthens postural muscles.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Grip strengthening</div><div class="ex-detail">Squeeze soft ball 30 times each hand. Keeps arm muscles active.</div></div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Post-op rehab exercises</div><span class="pill pill-green">After surgery</span></div>
+            <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">Rotator cuff has the longest recovery. Protect the repair above all else.</div>
+            <div class="exercise-item"><div class="ex-num">1</div><div><div class="ex-name">Pendulum swings</div><div class="ex-detail">Begin Day 1. Gravity only, no muscle activation whatsoever. 3x daily.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">2</div><div><div class="ex-name">Elbow, wrist and hand motion</div><div class="ex-detail">Full motion of everything below the shoulder. Prevents stiffness.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">3</div><div><div class="ex-name">Passive forward flexion</div><div class="ex-detail">Week 6+. PT lifts arm for you. Zero active muscle use yet.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">4</div><div><div class="ex-name">Active-assisted raises</div><div class="ex-detail">Month 3+. Use pulley or other arm to help lift. Very slow.</div></div></div>
+            <div class="exercise-item"><div class="ex-num">5</div><div><div class="ex-name">Resistance band rotations</div><div class="ex-detail">Month 4+. Light band for external and internal rotation.</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Pain and stiffness - what is normal?</div><span class="pill pill-amber">Important to know</span></div>
+          <div class="three-col" style="margin-bottom:0;">
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Normal pain</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Deep shoulder aching especially at night. Night pain is very common for 6-8 weeks. A recliner is often more comfortable than a bed.</div>
+            </div>
+            <div style="padding:14px;background:var(--amber-light);border-radius:var(--radius-sm);border:1px solid #f5d89a;">
+              <div style="font-size:11px;font-weight:600;color:var(--amber);text-transform:uppercase;margin-bottom:8px;">Normal stiffness</div>
+              <div style="font-size:12px;color:#7a4a00;line-height:1.7;">Very stiff for first 3 months. This is intentional. The tendon needs to heal before being stretched. Trust the process.</div>
+            </div>
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Call us if you have...</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.7;">Fever above 101F. Numbness in fingers. Sudden pop or snap in shoulder. Wound drainage or increasing redness.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- END EDUCATION SCREEN -->
   </div>
 </div>
 
@@ -1538,7 +1843,8 @@ const screenTitles = {
   nurse: ['Nurse chat', 'Message your care team'],
   nutrition: ['Nutrition & hydration', 'Food and water tracking'],
   schedule: ['Schedule', 'Book your appointments'],
-  reviews: ['Feedback & reviews', 'Share your experience']
+  reviews: ['Feedback & reviews', 'Share your experience'],
+  education: ['My procedure', 'Everything you need to know']
 };
 
 function showScreen(id, el) {
@@ -1722,6 +2028,16 @@ function analyzeWound(input) {
     document.getElementById('wound-analyzing').style.display = 'none';
     document.getElementById('wound-result').style.display = 'block';
   }, 2500);
+}
+
+
+// ── EDUCATION TAB SWITCHER ──
+function showEdu(id, btn) {
+  document.querySelectorAll('.edu-section').forEach(s => s.style.display = 'none');
+  document.querySelectorAll('.edu-tab').forEach(t => t.classList.remove('active'));
+  var el = document.getElementById('edu-' + id);
+  if (el) el.style.display = 'block';
+  if (btn) btn.classList.add('active');
 }
 
 // ── SURGERY TYPE SWITCHER ──
