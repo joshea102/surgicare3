@@ -763,6 +763,68 @@
   .ex-name { font-size: 13px; font-weight: 500; color: var(--text); }
   .ex-detail { font-size: 11px; color: var(--text-3); margin-top: 2px; line-height: 1.5; }
 
+
+  /* ── MOBILE RESPONSIVE ── */
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 99;
+  }
+  .sidebar-overlay.open { display: block; }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      z-index: 200;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .hamburger { display: flex; }
+    .metrics-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .two-col { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr; }
+    .content { padding: 16px; }
+    .topbar { padding: 0 16px; }
+    .topbar-right { display: none; }
+    .topbar-title { font-size: 14px; }
+    .metric-value { font-size: 22px; }
+    .ai-box { flex-direction: column; gap: 10px; }
+    .photo-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .edu-tab { font-size: 11px; padding: 6px 12px; }
+    .section-intro h1 { font-size: 20px; }
+    .chat-window { height: 240px; }
+    .appt-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .team-card { flex-wrap: wrap; }
+    .water-cup { width: 28px; height: 34px; }
+  }
+  @media (max-width: 480px) {
+    .metrics-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .metric-card { padding: 12px 14px; }
+    .metric-value { font-size: 20px; }
+    .card { padding: 14px; }
+    .edu-tab { font-size: 10px; padding: 5px 10px; }
+  }
+
   /* ── ANIMATIONS ── */
   .screen.active { animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
@@ -904,6 +966,10 @@
       <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
       Dashboard
     </div>
+    <div class="nav-item" onclick="showScreen('preop',this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+      Pre-op prep
+    </div>
     <div class="nav-item" onclick="showScreen('postop',this)">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
       Post-op care
@@ -960,10 +1026,16 @@
 
 <!-- ══════════════════════════════ MAIN ══════════════════════════════ -->
 <div class="main">
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
   <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     <div class="topbar-left">
       <div class="topbar-title" id="screen-title">Dashboard</div>
       <div class="topbar-sub" id="screen-sub">Good morning, Sarah · <span id="surgery-label">Total Knee Replacement</span></div>
+    </div>
     </div>
     <div class="topbar-right">
       <span class="pill pill-green"><span class="pill-dot"></span>Recovery on track</span>
@@ -1570,6 +1642,149 @@
     </div>
 
 
+
+    <!-- PRE-OP SCREEN -->
+    <div id="screen-preop" class="screen">
+      <div class="section-intro">
+        <h1>Pre-op preparation</h1>
+        <p>Everything you need to do and know before your surgery at Orthopedic and Spine Institute.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></div>
+        <div>
+          <div class="ai-label">Important reminder</div>
+          <div class="ai-text">Complete all items on this checklist before your surgery date. If you have any questions call the Orthopedic and Spine Institute at (555) 123-4567. Dr. O'Shea's team is here to help you prepare.</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+
+        <div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">2 weeks before surgery</div><span class="pill pill-blue">Start now</span></div>
+            <div class="check-list">
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Stop taking blood thinners (aspirin, ibuprofen, Advil) — ask Dr. O'Shea first</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Stop smoking — smoking significantly slows healing and increases infection risk</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Complete all pre-op lab work and imaging ordered by Dr. O'Shea</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Get medical clearance from your primary care doctor if required</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Fill all post-op prescriptions so they are ready when you get home</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Arrange for someone to drive you home and stay the first night</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Arrange time off work — discuss duration with Dr. O'Shea based on your job type</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Begin prehab exercises — see the My Procedure section for your surgery type</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">1 week before surgery</div><span class="pill pill-amber">Coming up</span></div>
+            <div class="check-list">
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Prepare your home recovery area — recliner, bedside essentials, easy access bathroom</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Buy ice packs or a cryo-cuff — you will need them daily for weeks</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Set up a raised toilet seat if needed (especially for knee and hip patients)</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Remove rugs and trip hazards from your home</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Prepare easy meals and snacks in advance or arrange meal delivery</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Confirm your surgery time by calling (555) 123-4567</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Wash the surgical area with antibacterial soap each day for 3 days before surgery</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Night before surgery</div><span class="pill pill-red">Critical</span></div>
+            <div class="warn-box">Nothing to eat or drink after midnight. This includes water, gum, and mints. Violating this rule will cancel your surgery.</div>
+            <div class="check-list">
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Nothing to eat or drink after midnight — no exceptions</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Shower with antibacterial soap — do not shave the surgical area</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Lay out loose comfortable clothing for surgery day</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Remove nail polish from fingers and toes</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Take only medications approved by Dr. O'Shea with a small sip of water</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Set your alarm — arrive at the time given by the clinic</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Get a good night of sleep</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Day of surgery</div><span class="pill pill-red">Surgery day</span></div>
+            <div class="check-list">
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Do NOT eat or drink anything — including water</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Wear loose comfortable clothing — shorts or button-up shirt depending on surgery</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Leave jewelry, valuables, and contact lenses at home</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Bring your photo ID and insurance card</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Bring a list of all medications you currently take</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Have your driver drop you off and be available to pick you up</div>
+              <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Bring this app — you will receive your post-op instructions through it</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header"><div class="card-title">What to bring to the hospital</div></div>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Photo ID and insurance card</div><div class="tl-time">Required for check-in</div></div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Medication list</div><div class="tl-time">Write down every medication and dosage you take</div></div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Loose comfortable clothing</div><div class="tl-time">Shorts for knee and ankle, button-up shirt for shoulder</div></div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Slip-on shoes</div><div class="tl-time">No laces — you will not be able to bend to tie them after</div></div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">Charged phone</div><div class="tl-time">To reach your driver and access this app post-op</div></div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--blue)"></div><div><div class="tl-title">A trusted person</div><div class="tl-time">Must stay in the building — you cannot leave alone</div></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Fasting guidelines</div><span class="pill pill-red">No exceptions</span></div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">
+            <div style="padding:14px;background:var(--red-light);border-radius:var(--radius-sm);border:1px solid #f5b8b8;">
+              <div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:4px;">After midnight — STOP all of these</div>
+              <div style="font-size:12px;color:#7a2020;line-height:1.8;">Solid food of any kind · Milk and dairy · Orange juice and pulpy drinks · Alcohol · Gum and mints · Hard candy</div>
+            </div>
+            <div style="padding:14px;background:var(--amber-light);border-radius:var(--radius-sm);border:1px solid #f5d89a;">
+              <div style="font-size:12px;font-weight:600;color:var(--amber);margin-bottom:4px;">Up to 2 hours before — ONLY these</div>
+              <div style="font-size:12px;color:#7a4a00;line-height:1.8;">Clear water · Black coffee (no cream or sugar) · Clear apple juice · Clear broth</div>
+            </div>
+            <div style="padding:14px;background:var(--green-light);border-radius:var(--radius-sm);border:1px solid #a0e0ce;">
+              <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:4px;">Approved medications with a sip of water</div>
+              <div style="font-size:12px;color:#0a5c3d;line-height:1.8;">Only medications specifically approved by Dr. O'Shea. When in doubt, call us at (555) 123-4567.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Prepare your home before you leave</div><span class="pill pill-blue">Set this up in advance</span></div>
+        <div class="three-col" style="margin-bottom:0;">
+          <div>
+            <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px;">Bedroom setup</div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Bed at easy height to get in and out</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Extra pillows for elevation</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Phone charger within reach</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">TV remote and entertainment ready</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Recliner available (especially shoulder patients)</span></div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px;">Bathroom setup</div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Raised toilet seat (knee patients)</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Shower chair or bench</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Grab bars or handrails if possible</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Non-slip bath mat</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Waterproof bandage covers for shower</span></div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px;">Kitchen and living area</div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Easy meals prepped or delivery planned</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Frequently used items at waist height</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">All rugs and trip hazards removed</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Medications and water on nightstand</span></div>
+            <div class="check-item" style="padding:5px 0;"><div class="check-box" onclick="toggleCheck(this)"></div><span style="font-size:12px;">Ice packs in freezer and ready to use</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- END PRE-OP SCREEN -->
+
     <!-- EDUCATION SCREEN -->
     <div id="screen-education" class="screen">
       <div class="section-intro">
@@ -1844,7 +2059,8 @@ const screenTitles = {
   nutrition: ['Nutrition & hydration', 'Food and water tracking'],
   schedule: ['Schedule', 'Book your appointments'],
   reviews: ['Feedback & reviews', 'Share your experience'],
-  education: ['My procedure', 'Everything you need to know']
+  education: ['My procedure', 'Everything you need to know'],
+  preop: ['Pre-op preparation', 'Get ready for your surgery']
 };
 
 function showScreen(id, el) {
@@ -2039,6 +2255,23 @@ function showEdu(id, btn) {
   if (el) el.style.display = 'block';
   if (btn) btn.classList.add('active');
 }
+
+
+// ── MOBILE SIDEBAR ──
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.querySelector('.sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+// Close sidebar when nav item clicked on mobile
+document.querySelectorAll('.nav-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    if (window.innerWidth <= 768) closeSidebar();
+  });
+});
 
 // ── SURGERY TYPE SWITCHER ──
 const surgeryInstructions = {
